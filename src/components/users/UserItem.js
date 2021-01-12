@@ -13,12 +13,12 @@
                      <a href={html_url} className="btn btn-dark btn-sm my-1">More</a>
                  </div>
              </div>
-         )     
- }
+         );     
+ };
 
- UserItem.proptypes = {
-     user: PropTypes.object.isrequired
- }
+ UserItem.propTypes = {
+     user: PropTypes.object.isRequired
+ };
  
- export default UserItem
+ export default UserItem;
  
