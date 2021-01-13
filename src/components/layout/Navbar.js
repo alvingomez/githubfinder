@@ -2,7 +2,7 @@ import React from 'react';
 import { FaGithub } from "react-icons/fa";
 import PropTypes from 'prop-types';
 
-const Navbar = (props) =>  {   
+const Navbar = (props ) =>  {   
 
         return (
             <nav className="navbar bg-primary">
