@@ -5,14 +5,21 @@ import axios from 'axios';
 import './App.css';
 
 class App extends Component {
+  state = {
+    Users: [],
+    loading: false  
+  }
+
   async componentDidMount(){
-    const response = await axios.get('https:api.github.com/users');
-    console.log(response.data);
+    this.setState({loading: true})
+     const response = await axios.get('https:api.github.com/users');
+    
+    this.setState({users: response.data, loading: false}); 
   }
   
   render(){
         
-    return( 
+    return(  
       <div className='App'>        
          <Navbar />
          <div className="container">
