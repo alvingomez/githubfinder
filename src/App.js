@@ -6,24 +6,24 @@ import './App.css';
 
 class App extends Component {
   state = {
-    Users: [],
+    users: [],
     loading: false  
   }
-
+  //Will show loading or spnning while waiting for the api to complete
   async componentDidMount(){
-    this.setState({loading: true})
-     const response = await axios.get('https:api.github.com/users');
+    this.setState({loading: true});
+     const response = await axios.get('https://api.github.com/users');     
     
-    this.setState({users: response.data, loading: false}); 
+    this.setState({users:response.data, loading: false}); 
   }
   
-  render(){
+  render(){ 
         
     return(  
       <div className='App'>        
          <Navbar />
          <div className="container">
-           <Users  />
+           <Users loading={this.state.loading} users={this.state.users} />
          </div>         
       </div>
     )
