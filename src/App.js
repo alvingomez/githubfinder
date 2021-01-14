@@ -11,8 +11,11 @@ class App extends Component {
   }
   //Will show loading or spnning while waiting for the api to complete
   async componentDidMount(){
+    console.log(process.env.REACT_APP_GITHUB_CLIENT_SECRET);
     this.setState({loading: true});
-     const response = await axios.get('https://api.github.com/users');     
+     const response = await axios.get(`https://api.github.com/users?client_id=$
+     {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
+     {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);     
     
     this.setState({users:response.data, loading: false}); 
   }
