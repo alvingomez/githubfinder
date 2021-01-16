@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
+import Search from './components/users/Search';
 import axios from 'axios';
 import './App.css';
 
 class App extends Component {
   state = {
     users: [],
-    loading: false  
+    loading: false   
   }
   //Will show loading or spnning while waiting for the api to complete
   async componentDidMount(){
-    console.log(process.env.REACT_APP_GITHUB_CLIENT_SECRET);
+    
     this.setState({loading: true});
      const response = await axios.get(`https://api.github.com/users?client_id=$
      {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
@@ -26,6 +27,7 @@ class App extends Component {
       <div className='App'>        
          <Navbar />
          <div className="container">
+           <Search />
            <Users loading={this.state.loading} users={this.state.users} />
          </div>         
       </div>
