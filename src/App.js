@@ -11,23 +11,32 @@ class App extends Component {
     loading: false   
   }
   //Will show loading or spnning while waiting for the api to complete
-  async componentDidMount(){
+  // async componentDidMount(){
     
-    this.setState({loading: true});
-     const response = await axios.get(`https://api.github.com/users?client_id=$
-     {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
-     {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);     
+  //   this.setState({loading: true});
+  //    const response = await axios.get(`https://api.github.com/users?client_id=$
+  //    {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
+  //    {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);     
     
-    this.setState({users:response.data, loading: false}); 
-  }
+  //   this.setState({users:response.data, loading: false}); 
+  // };
   
+  searchUsers = async(text) => {
+    
+    const response = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=$
+     {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
+     {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);         
+     
+    this.setState({users:response.data.items, loading: false}); 
+  };
+
   render(){ 
         
     return(  
       <div className='App'>        
          <Navbar />
          <div className="container">
-           <Search />
+           <Search searchUsers={this.searchUsers} />
            <Users loading={this.state.loading} users={this.state.users} />
          </div>         
       </div>
