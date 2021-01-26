@@ -21,8 +21,8 @@ class App extends Component {
   //   this.setState({users:response.data, loading: false}); 
   // };
   
-  searchUsers = async(text) => {
-    
+ //Search user input button
+  searchUsers = async(text) => {    
     const response = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=$
      {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
      {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);         
@@ -30,14 +30,22 @@ class App extends Component {
     this.setState({users:response.data.items, loading: false}); 
   };
 
+  //Clear Users Button
+  clearUsers = () => this.setState({users:[], loading:false});
+  
+
   render(){ 
-        
+    const {users, loading} = this.state;
     return(  
       <div className='App'>        
          <Navbar />
          <div className="container">
-           <Search searchUsers={this.searchUsers} />
-           <Users loading={this.state.loading} users={this.state.users} />
+           <Search 
+            searchUsers={this.searchUsers} 
+            clearUsers={this.clearUsers} 
+            // checking if there are 0 or more than 0 users 
+            showClear = {users.length > 0 ? true : false}/>
+           <Users loading={loading} users={users} />
          </div>         
       </div>
     )
