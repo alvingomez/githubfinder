@@ -1,10 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
     state = {
         text:''
     };
 
+    static propTypes = {
+        searchUsers: PropTypes.func.isRequired,
+        clearUsers: PropTypes.func.isRequired,
+        showClear: PropTypes.bool.isRequired
+    };
     onSubmit = (e) => {
         e.preventDefault();
         //Passing state text to the main app component through props
@@ -18,6 +24,7 @@ export class Search extends Component {
         this.setState({[e.target.name]:e.target.value})}    
 
     render() {
+        const {showClear, clearUsers} =this.props
         return (
             <div>
                 <form onSubmit={this.onSubmit} className="form"> 
@@ -29,7 +36,10 @@ export class Search extends Component {
                     onChange={this.onChange} />
                 <input type="submit" value="Search" className="btn btn-dark btn-block" />
                 </form>
-            <button className='btn btn-light btn-block'>Clear</button>
+                {showClear && 
+                (<button className='btn btn-light btn-block'
+                         onClick={clearUsers}>Clear
+                 </button>)}            
             </div>
         )
     }
