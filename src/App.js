@@ -11,6 +11,7 @@ import './App.css';
 class App extends Component {
   state = {
     users: [],
+    user: {},
     loading: false,
     alert: null   
   }
@@ -33,6 +34,18 @@ class App extends Component {
      
     this.setState({users:response.data.items, loading: false}); 
   };
+
+  //Get single Github user
+  getUser = (async (username) => {
+    this.setState({loading:true});
+      const response = await axios.get(`https://api.github.com/users/${username}?client_id=$
+       {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
+       {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);         
+       
+      this.setState({users:response.data, loading: false});      
+  });
+
+  
 
   //Clear Users Button
   clearUsers = () => this.setState({users:[], loading:false});  
@@ -61,11 +74,11 @@ class App extends Component {
                   showClear = {users.length > 0 ? true : false}
                   //The alert here has two argments and is just a message text
                   setAlert={this.setAlert}
-                />
-            
+                />            
                 <Users loading={loading} users={users} />
                </Fragment>
              )} />
+              {/* About page */}
              <Route exact path='/about' component={About} />
            </Switch>           
          </div>         
