@@ -7,14 +7,15 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 class User extends Component{
     componentDidMount(){
         //React router match object
-        this.props.getUser(this.props.match.params.login);        
-    }
-    
+        this.props.getUser(this.props.match.params.login);
+        this.props.getUserRepos(this.props.match.params.login)       
+    }    
 
     static propTypes = {
         loading: PropTypes.bool,
         user: PropTypes.object.isRequired, //object
-        getUser: PropTypes.func.isRequired //function
+        getUser: PropTypes.func.isRequired, //function
+        getUserRepos:PropTypes.func.isRequired
     }
 
     render(){
