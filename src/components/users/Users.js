@@ -4,7 +4,7 @@ import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types'; 
 
 const Users = ({users, loading}) => {      
-        console.log(users);
+        
         if(loading){
             return <Spinner />;
         } else {
